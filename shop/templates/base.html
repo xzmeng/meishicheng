@@ -11,6 +11,9 @@
     <a href="/" class="logo">My shop</a>
   </div>
   <div id="subheader">
+    <div class="login">
+        <a href="{% url "account:login" %}">login</a>
+    </div>
     <div class="cart">
       {% with total_items=cart|length %}
           {% if cart|length > 0 %}
