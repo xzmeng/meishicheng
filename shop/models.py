@@ -65,11 +65,28 @@ class Category(models.Model):
                            args=[self.slug])
 
 
+class Restaurant(models.Model):
+    name = models.CharField(max_length=200,
+                            db_index=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+            return reverse('shop:product_list_by_restaurant',
+                           args=[self.name])
+
+
 class Product(models.Model):
     category = models.ForeignKey(Category,
                                  related_name='products',
                                  on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant,
+                                   related_name='products',
+                                   on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
+    kouwei = models.CharField(max_length=50)
+    gongyi = models.CharField(max_length=50)
     slug = models.SlugField(max_length=200, db_index=True)
     image = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)

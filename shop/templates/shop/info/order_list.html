@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% for order in order_list %}
+  <h1>订单编号:{{ order.id }}</h1>
+  {% for item in order.get_items %}
+  <p>{{ item.product.name }} X ({{ item.quantity }})
+  {{ item.product.restaurant }}</p>
+  {% endfor %}
+{% endfor %}
+
+{% endblock %}

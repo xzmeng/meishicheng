@@ -23,6 +23,7 @@ class FoodItemPipeline:
     def __init__(self, mongo_uri=None, mongo_db=None):
         self.mongo_uri = mongo_uri
         self.mongo_db = mongo_db
+        self.foodset = set()
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -41,6 +42,8 @@ class FoodItemPipeline:
     def process_item(self, item, spider):
         if isinstance(item, FoodItem):
             self.db[self.collection_name].insert_one(dict(item))
+        if item not in self.foodset:
+            raise DropItem("Drop duplicated item.")
         return item
 
 

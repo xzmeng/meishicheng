@@ -5,24 +5,24 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Checkout</h1>
+  <h1>结算中心</h1>
 
   <div class="order-info">
-    <h3>Your order</h3>
+    <h3>您的订单</h3>
     <ul>
       {% for item in cart %}
         <li>
           {{ item.quantity }}x {{ item.product.name }}
-          <span>${{ item.total_price }}</span>
+          <span>CN¥ {{ item.total_price }}</span>
         </li>
       {% endfor %}
     </ul>
-    <p>Total: ${{ cart.get_total_price }}</p>
+    <p>合计: CN¥ {{ cart.get_total_price }}</p>
   </div>
 
   <form action="." method="post" class="order-form">
     {{ form.as_p }}
-    <p><input type="submit" value="Place order"></p>
+    <p><input type="submit" value="提交订单"></p>
     {% csrf_token %}
   </form>
 {% endblock %}

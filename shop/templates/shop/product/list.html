@@ -7,28 +7,67 @@
 
 {% block content %}
   <div id="sidebar">
-    <h3>Categories</h3>
+    <form id="search" action="{% url 'shop:search'%}" method="get">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" id="search_submit" value="搜索"></p>
+    </form>
+    <h3>分类</h3>
     <ul>
-      <li {% if not category %}class="selected"{% endif %}>
-        <a href="{% url "shop:product_list" %}">All</a>
+      <li {% if not category and not restaurant %}class="selected"{% endif %}>
+        <a href="{% url "shop:product_list" %}">所有菜品</a>
       </li>
       {% for c in categories %}
         <li {% if category.slug == c.slug %}class="selected"{% endif %}>
           <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
         </li>
       {% endfor %}
+    <h3>餐馆</h3>
+    <ul>
+      {% for r in restaurants %}
+        <li {% if restaurant.name == r.name %}class="selected"{% endif %}>
+          <a href="{{ r.get_absolute_url }}">{{ r.name }}</a>
+        </li>
+      {% endfor %}
     </ul>
   </div>
+  <div>
+
+  </div>
   <div id="main" class="product-list">
-    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+    <h1>{% if category %}{{ category.name }}
+    {% elif restaurant %}{{ restaurant.name }}
+    {% else %}Products{% endif %}</h1>
     {% for product in products %}
       <div class="item">
         <a href="{{ product.get_absolute_url }}">
           <img src="{% if product.image %}{{ product.image }}{% else %}{% static "img/no_image.png" %}{% endif %}">
         </a>
-        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
-        ${{ product.price }}
+        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+        {{ product.restaurant.name }} <br>
+        {{ product.price }}元
       </div>
     {% endfor %}
   </div>
+
+
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if products.has_previous %}
+            <a href="?page=1">&laquo;第一页</a>
+            <a href="?page={{ products.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+              {{ products.number }}/{{ products.paginator.num_pages }}.
+        </span>
+
+        {% if products.has_next %}
+            <a href="?page={{ products.next_page_number }}">下一页</a>
+            <a href="?page={{ products.paginator.num_pages }}">最后一页 &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+
 {% endblock %}

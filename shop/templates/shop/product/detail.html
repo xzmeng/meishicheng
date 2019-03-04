@@ -10,12 +10,25 @@
     <img src="{% if product.image %}{{ product.image }}{% else %}{% static "img/no_image.png" %}{% endif %}">
     <h1>{{ product.name }}</h1>
     <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
-    <p class="price">${{ product.price }}</p>
+    <p class="price">CN¥ {{ product.price }}</p>
     <form action="{% url "cart:cart_add" product.id %}" method="post">
       {{ cart_product_form }}
       {% csrf_token %}
-      <input type="submit" value="Add to cart">
+      <input type="submit" value="添加到购物车">
     </form>
     {{ product.description|linebreaks }}
+    {% if recommended_products %}
+      <div class="recommendations">
+        <h3>"猜您喜欢..."</h3>
+        {% for p in recommended_products %}
+          <div class="item">
+            <a href="{{ p.get_absolute_url }}">
+              <img src="{% if p.image %}{{ p.image }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+            </a>
+            <p><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 {% endblock %}

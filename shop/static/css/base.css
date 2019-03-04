@@ -153,6 +153,7 @@ ul.errorlist {
     float:left;
 }
 
+
 #sidebar ul{
     margin:0;
     padding:0;
@@ -327,4 +328,23 @@ form div.field {
     background:#efefef;
     color:#666;
     border-radius:4px;
+}
+
+div.pagination {
+    float: right;
+    font-size: 32px;
+    padding: 10px;
+    text-align: center;
+
+}
+
+#search input{
+    margin: 2px;
+    width: 170px;
+    float: none;
+    border-color: white;
+}
+
+#search_submit{
+    background-color: #1bae37;
 }
