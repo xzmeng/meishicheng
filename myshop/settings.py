@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
-    'payment.apps.PaymentConfig',
-    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -149,41 +147,41 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 # Braintree settings
-BRAINTREE_MERCHANT_ID = 'wfp6x3vxdw2cw5pv'
-BRAINTREE_PUBLIC_KEY = '3d9jnwtcwrz7t3fr'
-BRAINTREE_PRIVATE_KEY = '6882859b5a089141b16e0e2bf9a8206b'
+# BRAINTREE_MERCHANT_ID = 'wfp6x3vxdw2cw5pv'
+# BRAINTREE_PUBLIC_KEY = '3d9jnwtcwrz7t3fr'
+# BRAINTREE_PRIVATE_KEY = '6882859b5a089141b16e0e2bf9a8206b'
 
-from braintree import Configuration, Environment
+# from braintree import Configuration, Environment
 
-Configuration.configure(
-    Environment.Sandbox,
-    # Environment.Production,
-    BRAINTREE_MERCHANT_ID,
-    BRAINTREE_PUBLIC_KEY,
-    BRAINTREE_PRIVATE_KEY
-)
+# Configuration.configure(
+#     Environment.Sandbox,
+#     # Environment.Production,
+#     BRAINTREE_MERCHANT_ID,
+#     BRAINTREE_PUBLIC_KEY,
+#     BRAINTREE_PRIVATE_KEY
+# )
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # social
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',
-    'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.google.GoogleOAuth2',
+    # 'account.authentication.EmailAuthBackend',
+    # 'social_core.backends.facebook.FacebookOAuth2',
+    # 'social_core.backends.twitter.TwitterOAuth',
+    # 'social_core.backends.google.GoogleOAuth2',
 ]
 
 # social auth settings
-SOCIAL_AUTH_FACEBOOK_KEY = '' # Facebook App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '' # Facebook App Secret
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-
-SOCIAL_AUTH_TWITTER_KEY = '' # Twitter Consumer Key
-SOCIAL_AUTH_TWITTER_SECRET = '' # Twitter Consumer Secret
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '' # Google Consumer Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '' # Google Consumer Secret
+# SOCIAL_AUTH_FACEBOOK_KEY = '' # Facebook App ID
+# SOCIAL_AUTH_FACEBOOK_SECRET = '' # Facebook App Secret
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+#
+# SOCIAL_AUTH_TWITTER_KEY = '' # Twitter Consumer Key
+# SOCIAL_AUTH_TWITTER_SECRET = '' # Twitter Consumer Secret
+#
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '' # Google Consumer Key
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '' # Google Consumer Secret
 
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379

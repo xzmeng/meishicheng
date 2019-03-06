@@ -8,6 +8,7 @@
   <p>{{ item.product.name }} X ({{ item.quantity }})
   {{ item.product.restaurant }}</p>
   {% endfor %}
+  {% empty %}<h1>没有订单</h1>
 {% endfor %}
 
 {% endblock %}

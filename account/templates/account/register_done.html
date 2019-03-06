@@ -3,6 +3,6 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-  <h1>Welcome {{ new_user.first_name }}!</h1>
-  <p>Your account has been successfully created. Now you can <a href="{% url "account:login" %}">log in</a>.</p>
+  <h1>你好, {{ new_user.first_name }}!</h1>
+  <p>注册成功！ <a href="{% url "account:login" %}">登陆</a>.</p>
 {% endblock %}

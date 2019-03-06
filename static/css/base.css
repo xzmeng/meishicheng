@@ -262,3 +262,19 @@ form div.field {
     color:#666;
     border-radius:4px;
 }
+
+form {
+    float: left;
+}
+
+form ul, form li {
+    float: left;
+    clear: both;
+}
+.account label, .account input{
+    float: none;
+}
+
+.helptext {
+    display: none;
+}

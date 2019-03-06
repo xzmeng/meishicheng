@@ -10,7 +10,7 @@
   <table class="cart">
     <thead>
       <tr>
-        <th>图片</th>
+        <th></th>
         <th>菜品</th>
         <th>数量</th>
         <th>删除</th>
@@ -37,18 +37,31 @@
               </form>
             </td>
             <td><a href="{% url "cart:cart_remove" product.id %}">删除</a></td>
-            <td class="num">${{ item.price }}</td>
-            <td class="num">${{ item.total_price }}</td>
+            <td class="num">{{ item.price }}</td>
+            <td class="num">{{ item.total_price }}</td>
           </tr>
         {% endwith %}
       {% endfor %}
       <tr class="total">
         <td>合计</td>
         <td colspan="4"></td>
-        <td class="num">${{ cart.get_total_price }}</td>
+        <td class="num">{{ cart.get_total_price }}</td>
       </tr>
     </tbody>
   </table>
+  {% if recommended_products %}
+      <div class="recommendations">
+        <h3>"猜您喜欢..."</h3>
+        {% for p in recommended_products %}
+          <div class="item">
+            <a href="{{ p.get_absolute_url }}">
+              <img src="{% if p.image %}{{ p.image }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+            </a>
+            <p><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
   <p class="text-right">
     <a href="{% url "shop:product_list" %}" class="button light">继续选购</a>
     <a href="{% url "orders:order_create" %}" class="button">

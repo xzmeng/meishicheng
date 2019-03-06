@@ -54,8 +54,8 @@ class Category(models.Model):
 
     class Meta:
         ordering = ('name',)
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+        verbose_name = '菜系'
+        verbose_name_plural = '菜系'
 
     def __str__(self):
         return self.name
@@ -75,6 +75,10 @@ class Restaurant(models.Model):
     def get_absolute_url(self):
             return reverse('shop:product_list_by_restaurant',
                            args=[self.name])
+
+    class Meta:
+        verbose_name = '餐厅'
+        verbose_name_plural = '餐厅列表'
 
 
 class Product(models.Model):
@@ -96,6 +100,8 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
+        verbose_name = '菜品'
+        verbose_name_plural = '菜品列表'
         ordering = ('name',)
         index_together = (('id', 'slug'),)
 

@@ -1,0 +1,12 @@
+各个模块介绍
+myshop: 配置文件
+|- settings.py: 整个项目的配置信息
+|- urls.py: 路由信息(访问特定url交给谁处理)
+shop
+|- recommender.py 推荐系统
+cart: 购物车模块
+account: 用户认证模块
+crawl_food: 爬虫
+static: 保存静态文件如css等
+
+django介绍:

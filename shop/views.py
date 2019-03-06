@@ -70,4 +70,5 @@ def search_food(request):
     return render(request,
                   'shop/product/search.html',
                   {'products': products,
+                   'search_name': search_name,
                    'page': page})

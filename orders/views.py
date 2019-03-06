@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from .models import OrderItem,Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
-from .tasks import order_created
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import get_object_or_404
 from .models import Order

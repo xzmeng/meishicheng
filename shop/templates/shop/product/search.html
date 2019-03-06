@@ -18,8 +18,8 @@
       <div class="pagination">
     <span class="step-links">
         {% if products.has_previous %}
-            <a href="?page=1">&laquo;第一页</a>
-            <a href="?page={{ products.previous_page_number }}">上一页</a>
+            <a href="?search_name={{ search_name }}&page=1">&laquo;第一页</a>
+            <a href="?search_name={{ search_name }}&page={{ products.previous_page_number }}">上一页</a>
         {% endif %}
 
         <span class="current">
@@ -27,8 +27,8 @@
         </span>
 
         {% if products.has_next %}
-            <a href="?page={{ products.next_page_number }}">下一页</a>
-            <a href="?page={{ products.paginator.num_pages }}">最后一页 &raquo;</a>
+            <a href="?search_name={{ search_name }}&page={{ products.next_page_number }}">下一页</a>
+            <a href="?search_name={{ search_name }}&page={{ products.paginator.num_pages }}">最后一页 &raquo;</a>
         {% endif %}
     </span>
   </div>

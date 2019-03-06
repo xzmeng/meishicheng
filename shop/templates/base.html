@@ -12,13 +12,21 @@
   </div>
   <div id="subheader">
     {% if request.user.is_authenticated %}
+      {% if request.user.is_staff %}
+        你好,管理员
+        <a href="/admin"> 进入后台管理页面 </a>
+        <a href="{% url 'account:password_change' %}"> 修改密码 </a>
+        <a href="{% url 'account:logout' %}"> 注销 </a>
+      {% else %}
         Hello, {{ user.username }}
-      <a href="{% url "shop:order_list" %}"> 订单信息 </a>
-      <a href="{% url 'account:edit' %}"> 个人信息 </a>
-      <a href="{% url 'account:logout' %}">注销</a>
+        <a href="{% url "shop:order_list" %}"> 订单信息 </a>
+        <a href="{% url 'account:edit' %}"> 个人信息 </a>
+        <a href="{% url 'account:password_change' %}"> 修改密码 </a>
+        <a href="{% url 'account:logout' %}"> 注销 </a>
+      {% endif %}
     {% else %}
-         <a href="{% url "account:login" %}">登陆</a>
-
+         <a href="{% url 'account:login' %}">用户登陆 </a>
+      <a href="/admin"> 管理员登陆</a>
     {% endif %}
 
 

@@ -46,5 +46,4 @@ class ProfileEditForm(forms.ModelForm):
         fields = ('date_of_birth', 'photo')
         labels = {
             'date_of_birth': '生日',
-            'photo': '照片',
         }

@@ -348,3 +348,10 @@ div.pagination {
 #search_submit{
     background-color: #1bae37;
 }
+
+.account li {
+    float: left;
+    clear: both;
+}
+
+

@@ -6,12 +6,6 @@ class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='orders_created',
                              on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField()
-    address = models.CharField(max_length=250)
-    postal_code = models.CharField(max_length=20)
-    city = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
@@ -19,6 +13,8 @@ class Order(models.Model):
 
     class Meta:
         ordering = ('-created',)
+        verbose_name = '订单'
+        verbose_name_plural = '订单列表'
 
     def __str__(self):
         return 'Order {}'.format(self.id)

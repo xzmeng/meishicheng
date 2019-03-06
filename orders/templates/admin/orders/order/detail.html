@@ -6,77 +6,69 @@
 {% endblock %}
 
 {% block title %}
-  Order {{ order.id }} {{ block.super }}
+  订单 {{ order.id }} {{ block.super }}
 {% endblock %}
 
 {% block breadcrumbs %}
   <div class="breadcrumbs">
-    <a href="{% url "admin:index" %}">Home</a> &rsaquo;
-    <a href="{% url "admin:orders_order_changelist" %}">Orders</a>
+    <a href="{% url "admin:index" %}">首页</a> &rsaquo;
+    <a href="{% url "admin:orders_order_changelist" %}">订单列表</a>
     &rsaquo;
-    <a href="{% url "admin:orders_order_change" order.id %}">Order {{ order.id }}</a>
-    &rsaquo; Detail
+    <a href="{% url "admin:orders_order_change" order.id %}">订单 {{ order.id }}</a>
+    &rsaquo; 详细信息
   </div>
 {% endblock %}
 
 {% block content %}
-<h1>Order {{ order.id }}</h1>
+<h1>订单 {{ order.id }}</h1>
 <ul class="object-tools">
   <li>
-    <a href="#" onclick="window.print();">Print order</a>
+    <a href="#" onclick="window.print();">打印订单</a>
   </li>
 </ul>
 <table>
   <tr>
-    <th>Created</th>
+    <th>下单日期</th>
     <td>{{ order.created }}</td>
   </tr>
   <tr>
-    <th>Customer</th>
-    <td>{{ order.first_name }} {{ order.last_name }}</td>
+    <th>顾客姓名</th>
+    <td>{{ order.user.name }} {{ order.user.name }}</td>
   </tr>
   <tr>
-    <th>E-mail</th>
-    <td><a href="mailto:{{ order.email }}">{{ order.email }}</a></td>
+    <th>订单金额</th>
+    <td>{{ order.get_total_cost }}</td>
   </tr>
   <tr>
-    <th>Address</th>
-    <td>{{ order.address }}, {{ order.postal_code }} {{ order.city }}</td>
-  </tr>
-  <tr>
-    <th>Total amount</th>
-    <td>${{ order.get_total_cost }}</td>
-  </tr>
-  <tr>
-    <th>Status</th>
-    <td>{% if order.paid %}Paid{% else %}Pending payment{% endif %}</td>
+    <th>订单状态</th>
+    <td>{% if order.paid %}未付款{% else %}待付款{% endif %}</td>
   </tr>
 </table>
 
 <div class="module">
-  <h2>Items bought</h2>
+  <h2>购买列表</h2>
   <div class="tabular">
     <table style="width:100%">
       <thead>
         <tr>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
+          <th>菜品</th>
+          <th>价格</th>
+          <th>数量</th>
+          <th>合计</th>
         </tr>
       </thead>
       <tbody>
         {% for item in order.items.all %}
           <tr class="row{% cycle "1" "2" %}">
             <td>{{ item.product.name }}</td>
-            <td class="num">${{ item.price }}</td>
+            <td class="num">{{ item.price }}</td>
             <td class="num">{{ item.quantity }}</td>
-            <td class="num">${{ item.get_cost }}</td>
+            <td class="num">{{ item.get_cost }}</td>
           </tr>
         {% endfor %}
         <tr class="total">
-          <td colspan="3">Total</td>
-          <td class="num">${{ order.get_total_cost }}</td>
+          <td colspan="3">合计</td>
+          <td class="num">{{ order.get_total_cost }}</td>
         </tr>
       </tbody>
     </table>
