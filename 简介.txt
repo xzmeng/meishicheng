@@ -29,7 +29,7 @@ account
 |-tests.py   # 测试,不会用到
 |-urls.py    # url映射
 |-views.py   # 保存视图函数,实现大部分的页面逻辑
-在本项目中具有shop,account,cart,order四个app
+在本项目中具有shop,account,cart,order四个app, 建议先看shop
 其他的app可能多出来一两个文件,不过组织方式都是一样的需要扩展功能直接在相应
 的app里面加就行,要添加新的app需要在settings.py中进行配置。
 第一次初始化后每个app目录里都会有一个migrations文件夹,这个文件夹

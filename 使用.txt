@@ -1,3 +1,19 @@
+1. 安装mongodb, redis, django, scrapy
+2. 进入meishicheng/crawl_food目录
+    $ scrapy crawl spider
+   大概需要10分钟左右爬取所有图片和信息
+3. 进入meishicheng目录
+    $ python setup.py
+   初始化数据库(使用sqlite3，可能有点慢)
+
+    $ python manage.py runserver
+    默认应该是 https://localhost:8000 吧
+
+    创建管理员的方法是在meishicheng目录下:
+    $ python manage.py createsuperuser
+
+以上在ubuntu 18.04上测试过，windows上应该差别不大.
+
 
 
 
