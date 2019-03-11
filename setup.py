@@ -1,5 +1,10 @@
 import subprocess
-# subprocess.run(['rm', 'db.sqlite3'])
+import os
+
+
+if os.path.exists('db.sqlite3'):
+    os.remove('db.sqlite3')
+
 subprocess.run(['python', 'crawl_food/crawl.py'])
 subprocess.run(['python', 'manage.py', 'makemigrations',
                 'account', 'cart', 'orders', 'shop'])
