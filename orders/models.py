@@ -2,6 +2,8 @@ from django.db import models
 from shop.models import Product
 from django.conf import settings
 
+
+# 订单的模型
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='orders_created',
@@ -9,7 +11,6 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
-    braintree_id = models.CharField(max_length=150, blank=True)
 
     class Meta:
         ordering = ('-created',)
@@ -26,6 +27,7 @@ class Order(models.Model):
         return self.items.all()
 
 
+# 订单中的项目
 class OrderItem(models.Model):
     order = models.ForeignKey(Order,
                               related_name='items',

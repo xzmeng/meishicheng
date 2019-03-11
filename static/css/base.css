@@ -278,3 +278,28 @@ form ul, form li {
 .helptext {
     display: none;
 }
+
+div.pagination {
+    float: right;
+    font-size: 32px;
+    padding: 10px;
+    text-align: center;
+
+}
+
+#search input{
+    margin: 2px;
+    width: 200px;
+    float: left;
+    border-color: white;
+}
+
+#search_submit{
+    background-color: #1bae37;
+    width: 200px;
+}
+
+.account li {
+    float: left;
+    clear: both;
+}

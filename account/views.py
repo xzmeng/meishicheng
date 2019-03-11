@@ -11,18 +11,16 @@ from .forms import LoginForm, UserRegistrationForm, \
 from .models import Profile
 
 
+# 用户注册
 def register(request):
     if request.method == 'POST':
+        # 构建用户注册表单
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
-            # Create a new user object but avoid saving it yet
             new_user = user_form.save(commit=False)
-            # Set the chosen password
             new_user.set_password(
                 user_form.cleaned_data['password'])
-            # Save the User object
             new_user.save()
-            # Create the user profile
             Profile.objects.create(user=new_user)
             return render(request,
                           'account/register_done.html',
@@ -34,6 +32,7 @@ def register(request):
                   {'user_form': user_form})
 
 
+# 用户编辑信息
 @login_required
 def edit(request):
     if request.method == 'POST':

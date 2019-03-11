@@ -70,7 +70,7 @@ ITEM_PIPELINES = {
    'crawl_food.pipelines.FoodItemPipeline': 300,
    'crawl_food.pipelines.FoodImagesPipeline': 1,
 }
-IMAGES_STORE = '../shop/static/food_images'
+IMAGES_STORE = '../static/food_images'
 MONGO_URI = 'mongodb://localhost:27017'
 MONGO_DB = 'chinese_food'
 # Enable and configure the AutoThrottle extension (disabled by default)

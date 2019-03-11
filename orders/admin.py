@@ -10,7 +10,7 @@ def order_detail(obj):
     return mark_safe('<a href="{}">View</a>'.format(
         reverse('orders:admin_order_detail', args=[obj.id])))
 
- 
+# 将订单导出到csv文件
 def export_to_csv(modeladmin, request, queryset): 
     opts = modeladmin.model._meta 
     response = HttpResponse(content_type='text/csv') 
@@ -19,9 +19,9 @@ def export_to_csv(modeladmin, request, queryset):
     writer = csv.writer(response) 
      
     fields = [field for field in opts.get_fields() if not field.many_to_many and not field.one_to_many] 
-    # Write a first row with header information 
+    # 根据每一个字段名将头部写好
     writer.writerow([field.verbose_name for field in fields]) 
-    # Write data rows 
+    # 写数据行
     for obj in queryset: 
         data_row = [] 
         for field in fields: 
@@ -38,7 +38,7 @@ class OrderItemInline(admin.TabularInline):
     model = OrderItem
     raw_id_fields = ['product']
 
-
+# 导出到pdf
 def order_pdf(obj):
     return mark_safe('<a href="{}">PDF</a>'.format(
         reverse('orders:admin_order_pdf', args=[obj.id])))

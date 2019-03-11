@@ -6,6 +6,8 @@ from .forms import CartAddProductForm
 from shop.recommender import Recommender
 
 
+# 添加物品到购物车
+# 必须post方法才会调用
 @require_POST
 def cart_add(request, product_id):
     cart = Cart(request)
@@ -19,6 +21,7 @@ def cart_add(request, product_id):
     return redirect('cart:cart_detail')
 
 
+# 从购物车删除物品
 def cart_remove(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
@@ -26,6 +29,7 @@ def cart_remove(request, product_id):
     return redirect('cart:cart_detail')
 
 
+# 购物车详情
 def cart_detail(request):
     cart = Cart(request)
     for item in cart:

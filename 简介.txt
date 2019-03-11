@@ -1,0 +1,36 @@
+1.数据获取:
+爬的网站是https://www.meishij.net/china-food/caixi/
+网站结构很简单，直接用requests也很好爬,简单起见用了scrapy
+爬虫的主题在crawl_food/crawl_food/spider.py 中,parse()方法
+提取出所有菜系的url, parse_one_page()将一个页面中的所有菜的
+url爬取出来生成一个item进行后续保存, parse_food()将菜的具体信息爬取出来;
+图片和数据的保存在crawl_food/crawl_food/pipelines.py中,
+FoodItemPipeline将爬取到的item保存到到MongoDB中,FoodImagesPipeline
+将图片的url进行下载并保存到制定目录中。客户先花一点时间看下官方文档应该很好看懂。
+2.网站组织
+创建一个Django项目会自动生成下面结构
+myshop
+|-myshop
+  |-__init__.py
+  |-settings.py # 项目包含什么app,使用什么数据库后端,各种静态文件存在哪里等
+  |-urls.py # url怎么映射,一般不会直接映射具体视图,而是间接包含
+  |-wsgi.py # wsgi实现默认使用django自带的,不会用到
+|-manage.py # python manage.py <command-name>
+其中myshop子目录中保存着该项目的配置信息, manage.py用来进行各种命令行操作
+项目的实际功能是通过添加app来实现的,一个app可以看作一个可以复用的模块
+一个app具有以下结构
+account
+|-templates    # 保存html模板
+|-__init__.py
+|-admin.py   # 定制根据models定制后台管理页面
+|-apps.py    # 保存app的具体配置,不会用到
+|-forms.py   # 保存表单信息
+|-models.py  # 保存数据库对象信息
+|-tests.py   # 测试,不会用到
+|-urls.py    # url映射
+|-views.py   # 保存视图函数,实现大部分的页面逻辑
+在本项目中具有shop,account,cart,order四个app
+其他的app可能多出来一两个文件,不过组织方式都是一样的需要扩展功能直接在相应
+的app里面加就行,要添加新的app需要在settings.py中进行配置。
+第一次初始化后每个app目录里都会有一个migrations文件夹,这个文件夹
+是记录数据库模型的提交历史的，方式类似git。

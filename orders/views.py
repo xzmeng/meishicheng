@@ -15,33 +15,7 @@ import weasyprint
 from shop.recommender import Recommender
 
 
-
-# def order_create(request):
-#     cart = Cart(request)
-#     if request.method == 'POST':
-#         form = OrderCreateForm(request.POST)
-#         if form.is_valid():
-#             order = form.save()
-#             for item in cart:
-#                 OrderItem.objects.create(order=order,
-#                                          product=item['product'],
-#                                          price=item['price'],
-#                                          quantity=item['quantity'])
-#             # clear the cart
-#             cart.clear()
-#             # launch asynchronous task
-#             order_created.delay(order.id)
-#             # set the order in the session
-#             request.session['order_id'] = order.id
-#             # redirect for payment
-#             return redirect(reverse('payment:process'))
-#     else:
-#         form = OrderCreateForm()
-#     return render(request,
-#                   'orders/order/create.html',
-#                   {'cart': cart, 'form': form})
-
-
+# 创建新的订单
 @login_required
 def order_create(request):
     cart = Cart(request)
@@ -56,13 +30,7 @@ def order_create(request):
                                      product=item['product'],
                                      price=item['price'],
                                      quantity=item['quantity'])
-        # clear the cart
         cart.clear()
-        # launch asynchronous task
-        # order_created.delay(order.id)
-        # set the order in the session
-        # request.session['order_id'] = order.id
-        # redirect for payment
         return redirect(reverse('shop:product_list'))
     else:
         form = OrderCreateForm()
@@ -71,7 +39,7 @@ def order_create(request):
                   {'cart': cart, 'form': form})
 
 
-
+# 查看订单详情, 要求管理员全县
 @staff_member_required
 def admin_order_detail(request, order_id):
     order = get_object_or_404(Order, id=order_id)
@@ -80,6 +48,7 @@ def admin_order_detail(request, order_id):
                   {'order': order})
 
 
+# 将订单导出到pdf
 @staff_member_required
 def admin_order_pdf(request, order_id):
     order = get_object_or_404(Order, id=order_id)

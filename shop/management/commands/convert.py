@@ -8,6 +8,8 @@ from shop.models import Category, Product, Restaurant
 from xpinyin import Pinyin
 
 
+# 这个类创建了 python manage.py convert 命令
+# 该命令将mongodb中的食物数据倒入到关系数据库中
 class Command(BaseCommand):
     def handle(self, *args, **options):
         pin = Pinyin()
@@ -19,6 +21,7 @@ class Command(BaseCommand):
         for food in db.food.find({}):
             categories.add(food['category'])
         categories = list(categories)
+        # 虚构了几个餐厅
         restaurants = ['阿坤私房菜', '橘子餐厅', '北欧时光·清真',
                        '辣一天川小館', '川人百味']
         categories = [Category(name=cat, slug=pin.get_pinyin(cat)) for cat in categories]

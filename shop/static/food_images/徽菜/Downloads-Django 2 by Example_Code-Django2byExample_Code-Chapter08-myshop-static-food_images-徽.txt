@@ -1,1 +1,0 @@
-Downloads/Django 2 by Example_Code/Django2byExample_Code/Chapter08/myshop/static/food_images/徽菜
